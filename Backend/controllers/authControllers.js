@@ -35,8 +35,6 @@ export const login = async(req, res) => {
     try {
          
          const user = await User.findOne({email})
-         
-         
          //if user doesnot exit 
          if(!user){
             return res.status(404).json({success: false , message : "User not found"})
@@ -45,14 +43,11 @@ export const login = async(req, res) => {
          //if exits  i) check password  or compare password
          const checkCorrectPassword =  await bcrypt.compare(req.body.password, user.password)
 
-
          //if password is incorrect 
          if(!checkCorrectPassword){
             return res.status(401).json({success:false , message:"Incorrect password or email"});
-
-         }
-
-         const {password , role , ...rest } = user._doc;
+             }
+          const {password , role , ...rest } = user._doc;
 
          //creating jwt token 
          const token = jwt.sign(

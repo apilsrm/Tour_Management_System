@@ -112,7 +112,7 @@ import Tour from '../models/Tour.js'
 
     try {
         
-        const getAllTour = await Tour.find({})
+        const getAllTour = await Tour.find({}).populate('reviews')
          .skip(page * 8 )
          .limit(8); /// page limit kati ota show garni 
 
@@ -153,10 +153,8 @@ import Tour from '../models/Tour.js'
             city,
             distance :{ $gte : distance },
             maxGroupSzies :{$gte : maxGroupSzies},
-        })
-         .
-
-
+        }).populate('reviews')
+         
         res
          .status(200)
          .json({
@@ -182,7 +180,7 @@ import Tour from '../models/Tour.js'
  
     try {
         
-        const getFeaturedTour = await Tour.find({ featured : true }).limit(8);
+        const getFeaturedTour = await Tour.find({ featured : true }).populate('reviews').limit(8);
         res
          .status(200)
          .json({

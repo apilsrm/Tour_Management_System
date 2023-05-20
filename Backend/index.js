@@ -7,6 +7,9 @@ import cookieParser from "cookie-parse";
 import tourRoute from "./routes/tours.js";
 import userRoute from "./routes/users.js";
 import authRoute from "./routes/auth.js";
+import reviewRoute from "./routes/reviews.js";
+import bookingRoute from "./routes/booking.js";
+
 const path = require("path");
 
 
@@ -48,6 +51,8 @@ app.use(cookieParser());
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/tours", tourRoute);
 app.use("/api/v1/users", userRoute);
+app.use("/api/v1/reviews", reviewRoute);
+app.use("/api/v1/booking", bookingRoute);
 
 
 
@@ -60,5 +65,3 @@ app.listen(port, () => {
   console.log('server listening  on port' , port);
       
   });
-
-
