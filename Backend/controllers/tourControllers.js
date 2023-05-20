@@ -13,7 +13,7 @@ import Tour from '../models/Tour.js'
          message: " Sucessfully created",
          data: savedTour,
        });
-   } catch (err) {
+   } catch (error) {
      res
        .status(500)
        .json({
@@ -39,7 +39,7 @@ import Tour from '../models/Tour.js'
          data: updateTour,
        });
         
-    } catch (err) {
+    } catch (error) {
         res
         .status(500)
         .json({
@@ -63,7 +63,7 @@ import Tour from '../models/Tour.js'
             
            });
           
-    } catch (err) {
+    } catch (error) {
         res
         .status(500)
         .json({
@@ -89,7 +89,7 @@ import Tour from '../models/Tour.js'
          });
 
         
-    } catch (err) {
+    } catch (error) {
         res
         .status(404)
         .json({
@@ -126,7 +126,7 @@ import Tour from '../models/Tour.js'
           data : getAllTour,
          });
 
-    } catch (err) {
+    } catch (error) {
         res
         .status(404)
         .json({

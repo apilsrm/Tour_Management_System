@@ -2,18 +2,21 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
-// import cookieParser from "cookie-parse";
+
+import cookieParser from "cookie-parse";
 import tourRoute from "./routes/tours.js";
 import userRoute from "./routes/users.js";
+import authRoute from "./routes/auth.js";
 const path = require("path");
 
 
 //configure
 dotenv.config();
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
+const corsOptions = {
+  origin : true,
+  credentials : true
+} 
 
 //databse connection
 mongoose.set("strictQuery",false);
@@ -24,7 +27,7 @@ const connect = async() => {
       useUnifiedTopology:true,
     });
     console.log('MongoDB is connected');
-  } catch (err) {
+  } catch (error) {
     console.log('MongoDB connection  successfully restored :) :) :)  '); //ii failed
   }
 }
@@ -37,10 +40,15 @@ app.get("/",(req , res) => {
 
 // middlewars
 app.use(express.json());
-app.use(cors());
-// app.use(cookieParser());
-app.use('/tours.js ', tourRoute);
-app.use("/users.js ", userRoute);
+app.use(express.urlencoded({ extended: true }));
+app.use(cors(corsOptions));
+app.use(cookieParser());
+
+
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/tours", tourRoute);
+app.use("/api/v1/users", userRoute);
+
 
 
 
